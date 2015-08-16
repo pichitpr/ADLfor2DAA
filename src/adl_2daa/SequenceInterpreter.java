@@ -81,14 +81,14 @@ public class SequenceInterpreter {
 		switch(opcode){
 		case NOP:
 			address++; 
-			return;
+			break;
 		case POP:
 			datastack.pop();
 			address++; 
-			return;
+			break;
 		case JUMP:
 			address = (Integer)param[0]; 
-			return;
+			break;
 		case BNEQ:
 			boolean b = (Boolean)datastack.pop();
 			if(b == false){
@@ -96,38 +96,38 @@ public class SequenceInterpreter {
 			}else{
 				address++;
 			}
-			return;
+			break;
 		case U_OP:
 			interpretUnaryOp(param); 
-			return;
+			break;
 		case B_OP:
 			interpretBinaryOp(param);
-			return;
+			break;
 		case COMPARE:
 			interpretComparison(param);
-			return;
+			break;
 		case ACTION:
 			interpretAction(param);
-			return;
+			break;
 		case FUNC:
 			interpretFunction(param);
-			return;
+			break;
 		case PUSH:
 			datastack.push(param[0]);
 			address++;
-			return;
+			break;
 		case BREAK:
 			address++;
-			return;
+			break;
 		case STARTACTION:
 		case ENDACTION:
 			spannedActionInfo.clear();
 			additionalData.onSpannedActionEnd();
 			address++;
-			return;
+			break;
 		default:
+			reportError("Unknown opcode "+opcode);
 		}
-		reportError("Unknown opcode "+opcode);
 	}
 	
 	private void interpretUnaryOp(Object[] param){
@@ -145,8 +145,7 @@ public class SequenceInterpreter {
 				datastack.push(i == 0);
 			}
 			address++;
-		}
-		else if(o instanceof Float){
+		}else if(o instanceof Float){
 			float f = (Float)o;
 			if((OpParam)param[0] == OpParam.SUB){
 				datastack.push(-f);
@@ -154,8 +153,9 @@ public class SequenceInterpreter {
 				datastack.push(f == 0);
 			}
 			address++;
+		}else{
+			reportError("Incompatible data "+o+" for unary operation "+param[0]);
 		}
-		reportError("Incompatible data "+o+" for unary operation "+param[0]);
 	}
 	
 	private void interpretBinaryOp(Object[] param){
@@ -178,9 +178,9 @@ public class SequenceInterpreter {
 					((Number)leftSide).intValue(), op, ((Number)rightSide).intValue()
 					);
 			break;
-		default:		
+		default:
+			reportError("Unknown binary operation "+op);
 		}
-		reportError("Unknown binary operation "+op);
 	}
 	
 	private void interpretMathOp(Object leftSide, OpParam op, Object rightSide){

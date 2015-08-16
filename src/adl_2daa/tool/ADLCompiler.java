@@ -53,14 +53,14 @@ public class ADLCompiler {
 			System.out.println("==== Init");
 			compiler = new ADLCompiler(astAgent.getInit().getStatements());
 			compiler.compile();
-			compiler.debug();
+			//compiler.debug();
 			model.setInit(new BehaviorSequence("init", compiler.generatedIns));
 		}
 		if(astAgent.getDes() != null){
 			System.out.println("==== Des");
 			compiler = new ADLCompiler(astAgent.getDes().getStatements());
 			compiler.compile();
-			compiler.debug();
+			//compiler.debug();
 			model.setDes(new BehaviorSequence("des", compiler.generatedIns));
 		}
 		
@@ -76,7 +76,7 @@ public class ADLCompiler {
 				System.out.println("==== Seq "+sequence.getIdentifier());
 				compiler = new ADLCompiler(sequence.getStatements());
 				compiler.compile();
-				compiler.debug();
+				//compiler.debug();
 				states[i][j] = new BehaviorSequence(sequence.getIdentifier(), compiler.generatedIns);
 				j++;
 			}

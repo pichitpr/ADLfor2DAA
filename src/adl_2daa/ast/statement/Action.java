@@ -33,6 +33,9 @@ public class Action extends ASTStatement{
 	@Override
 	public void compile(List<Instruction> ins, ADLCompiler compiler) {
 		IAction action = Registry.getAction(name);
+		if(action == null){
+			System.out.println("No action registered - "+name);
+		}
 		
 		int endLabel = compiler.getCurrentLabel();
 		ins.add(new Instruction(Opcode.STARTACTION,null));

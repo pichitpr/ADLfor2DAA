@@ -6,7 +6,7 @@ public enum TokenType {
 	FLOAT("^[0-9]+\\.[0-9]+",false),
 	INT("^[0-9]+",false),
 	STRING("^\"(?:[^\"\\\\]|\\\\.)*\"",false), //http://stackoverflow.com/questions/249791/regex-for-quoted-string-with-escaping-quotes
-	RESERVED("^(true|false|if|else(\\s*if)?|\\$)",true),
+	RESERVED("^(true|false|if|else(\\s*if)?)",true),
 	FUNC("^[a-zA-Z_]\\w*",false),
 	IDEN("^\\.[a-zA-Z_]\\w*",false),
 	L_PAREN("^\\(",false),
@@ -19,7 +19,7 @@ public enum TokenType {
 	SINGLEQUERY("^\\$",false),
 	END("^;",false),
 	LINEEND("^\\n",false),
-	EMPTY("^\\s+",false);
+	EMPTY("^[^\\S\\n]+",false);
 	
 	public final Pattern pattern;
 	public final boolean hasSubType;

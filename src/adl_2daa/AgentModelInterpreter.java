@@ -54,10 +54,8 @@ public abstract class AgentModelInterpreter {
 	public void update(float delta){
 		if(errorOccurs) return;
 		try {
-			for(SequenceInterpreter itp : stateItp){
-				if(itp != null){
-					itp.interpret();
-				}
+			for(int i=0; i<usedInterpreter; i++){
+				stateItp[i].interpret();
 			}
 		} catch (Exception e) {
 			System.out.println(agent.getIdentifier()+"#"+currentState+"\n"+e.getMessage());

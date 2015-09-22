@@ -4,7 +4,6 @@ public enum Opcode{
 	NOP, //No operation  ()
 	PUSH, //Push data onto a stack  (StackDatatype type, Object data) -- (INT/FLOAT/STRING,int/float/string)  (VAR/string)
 	POP, //Pop data from stack and throw it away  ()
-	//ASSIGN, //Pop data from stack and store in variable  (String varname)
 	U_OP, //Pop data from stack, do operation and push result onto a stack. (OpParam op)
 	B_OP, //Pop 2 data from stack, do operation and push result onto a stack. first pop = left side  (OpParam op)
 	COMPARE, //Pop 2 data from stack, do comparison and push result onto a stack. first pop = left side  (OpParam op)
@@ -12,6 +11,8 @@ public enum Opcode{
 	ACTION, //Do the same thing as FUNC but with spanned action supported and no return
 	JUMP, //Real IJUMP (int address)
 	BNEQ, //Real IBNEQ (int address)
+	ASSIGN, //Pop data stack and store to memIndex (int)
+	LOAD, //Pop data from stack as memIndex (int)
 	BREAK, //Stop interpreter
 	STARTACTION,
 	ENDACTION,

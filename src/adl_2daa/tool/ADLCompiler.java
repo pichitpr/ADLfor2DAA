@@ -91,6 +91,7 @@ public class ADLCompiler {
 	private List<ASTStatement> parsed;
 	private List<Instruction> generatedIns;
 	private int labelIndex = 0;
+	private int memIndex = 0;
 	
 	public ADLCompiler(List<ASTStatement> statements){
 		this.parsed = statements;
@@ -141,6 +142,16 @@ public class ADLCompiler {
 	
 	public void resetLabel(){
 		labelIndex = 0;
+	}
+	
+	public int getCurrentMemIndex(){
+		int i = memIndex;
+		memIndex++;
+		return i;
+	}
+	
+	public void resetMemIndex(){
+		memIndex = 0;
 	}
 	
 	public List<Instruction> getCompiledCode(){

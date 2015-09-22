@@ -15,6 +15,8 @@ public class SequenceInterpreter {
 	private List<Instruction> sequenceCode;
 	private int address;
 	private Stack<Object> datastack;
+	private HashMap<Integer,Object> register;
+	
 	private HashMap<String,Object> spannedActionInfo;
 	private InterpreterExtraData additionalData;
 	private String lastErrorMessage;
@@ -22,6 +24,7 @@ public class SequenceInterpreter {
 	public SequenceInterpreter(InterpreterExtraData additionalData){
 		this.address = 0;
 		this.datastack = new Stack<Object>();
+		this.register = new HashMap<Integer,Object>();
 		this.spannedActionInfo = new HashMap<String,Object>();
 		this.additionalData = additionalData;
 		this.lastErrorMessage = null;
@@ -34,6 +37,7 @@ public class SequenceInterpreter {
 	public void reset(){
 		address = 0;
 		datastack.clear();
+		register.clear();
 		spannedActionInfo.clear();
 		additionalData.onInterpreterReset();
 	}
@@ -78,6 +82,7 @@ public class SequenceInterpreter {
 			System.out.println(address+"@ "+ins);
 		}
 		
+		int memIndex;
 		switch(opcode){
 		case NOP:
 			address++; 
@@ -85,6 +90,17 @@ public class SequenceInterpreter {
 		case POP:
 			datastack.pop();
 			address++; 
+			break;
+		case ASSIGN:
+			Object storingData = datastack.pop();
+			memIndex = (Integer)param[0];
+			register.put(memIndex, storingData);
+			address++;
+			break;
+		case LOAD:
+			memIndex = (Integer)param[0];
+			datastack.push(register.get(memIndex));
+			address++;
 			break;
 		case JUMP:
 			address = (Integer)param[0]; 

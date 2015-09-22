@@ -5,6 +5,7 @@ import java.util.List;
 
 import adl_2daa.ast.ASTExpression;
 import adl_2daa.ast.ASTStatement;
+import adl_2daa.ast.expression.ASTUnary;
 import adl_2daa.ast.expression.And;
 import adl_2daa.ast.expression.Arithmetic;
 import adl_2daa.ast.expression.Bitwise;
@@ -16,9 +17,9 @@ import adl_2daa.ast.expression.Identifier;
 import adl_2daa.ast.expression.IntConstant;
 import adl_2daa.ast.expression.Or;
 import adl_2daa.ast.expression.StringConstant;
-import adl_2daa.ast.expression.ASTUnary;
 import adl_2daa.ast.statement.Action;
 import adl_2daa.ast.statement.Condition;
+import adl_2daa.ast.statement.Loop;
 import adl_2daa.ast.structure.Agent;
 import adl_2daa.ast.structure.Root;
 import adl_2daa.ast.structure.Sequence;
@@ -103,6 +104,8 @@ public class Parser {
 		Token tok = tokenizer.getToken();
 		if(tok.type == TokenType.RESERVED && tok.value.equalsIgnoreCase("if")){
 			return nextCondition();
+		}else if(tok.type == TokenType.RESERVED && tok.value.equalsIgnoreCase("loop")){
+			return nextLoop();
 		}else if(tok.type == TokenType.FUNC){
 			return nextAction();
 		}else if(tok.type == TokenType.R_BRACE){
@@ -127,6 +130,17 @@ public class Parser {
 			matchAndNext(TokenType.R_BRACE);
 		}
 		return new Condition(booleanExp, ifbody, elsebody);
+	}
+	
+	private Loop nextLoop() throws Exception{
+		matchAndNext(TokenType.RESERVED);
+		matchAndNext(TokenType.L_PAREN);
+		ASTExpression intExpression = nextExpression();
+		matchAndNext(TokenType.R_PAREN);
+		matchAndNext(TokenType.L_BRACE);
+		List<ASTStatement> content = nextStatements();
+		matchAndNext(TokenType.R_BRACE);
+		return new Loop(intExpression, content);
 	}
 	
 	private Action nextAction() throws Exception{

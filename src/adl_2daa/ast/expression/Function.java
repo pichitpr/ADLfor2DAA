@@ -29,6 +29,10 @@ public class Function extends ASTExpression{
 		return params;
 	}
 	
+	public boolean hasSingleQuery(){
+		return singleQuery;
+	}
+	
 	@Override
 	public void compile(List<Instruction> ins, ADLCompiler compiler) {
 		for(int i=params.length-1; i>=0; i--){

@@ -45,6 +45,10 @@ public class Comparison extends ASTBinary{
 		this.op = Comp.getByTag(op);
 	}
 	
+	public Comp getOp(){
+		return this.op;
+	}
+	
 	@Override
 	public void compile(List<Instruction> ins, ADLCompiler compiler) {
 		super.compile(ins, compiler);

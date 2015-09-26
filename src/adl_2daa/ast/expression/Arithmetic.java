@@ -44,6 +44,10 @@ public class Arithmetic extends ASTBinary{
 		this.op = MathOp.getByTag(op);
 	}
 	
+	public MathOp getOp(){
+		return this.op;
+	}
+	
 	@Override
 	public void compile(List<Instruction> ins, ADLCompiler compiler) {
 		super.compile(ins, compiler);

@@ -61,6 +61,6 @@ public class ASTUnary extends ASTExpression{
 				break;
 			}
 		}
-		node.toScript(str, 0);
+		node.toScript(str, 1);
 	}
 }

@@ -32,13 +32,13 @@ public abstract class ASTBinary extends ASTExpression{
 	
 	@Override
 	public void toScript(StringBuilder str, int indent){
-		str.append('(');
-		left.toScript(str, 0);
+		if(indent > 0) str.append('(');
+		left.toScript(str, 1);
 		str.append(' ');
 		parseBinaryOp(str);
 		str.append(' ');
-		right.toScript(str, 0);
-		str.append(')');
+		right.toScript(str, 1);
+		if(indent > 0) str.append(')');
 	}
 	
 	protected abstract void parseBinaryOp(StringBuilder str);

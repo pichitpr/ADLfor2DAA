@@ -15,36 +15,6 @@ import adl_2daa.internal.Opcode;
 
 public class ADLCompiler {
 	
-	/*
-	public static void compile(String filepath,String destpath) throws Exception{
-		File f = new File(filepath);
-		String code = "",tmp;
-		Reader r = new InputStreamReader(new FileInputStream(f), "UTF-8");
-		BufferedReader in = new BufferedReader(r);
-		while((tmp = in.readLine()) != null){
-			code += tmp+"\n";
-		}
-		in.close();
-		
-		Tokenizer tokenizer = new Tokenizer(code);
-		Parser parser = new Parser(tokenizer);
-		List<Statement> stList = new ArrayList<Statement>();
-		Statement st;
-		while((st = parser.nextStatement()) != null){
-			stList.add(st);
-		}
-		
-		Compiler compiler = new Compiler(stList);
-		compiler.compile();
-		
-		f = new File(destpath);
-		DataOutputStream out = new DataOutputStream(new FileOutputStream(f));
-		for(Instruction ins : compiler.generatedIns){
-			ins.save(out);
-		}
-		out.close();
-	}*/
-	
 	public static AgentModel compile(Agent astAgent){
 		AgentModel model = new AgentModel(astAgent.getIdentifier());
 		ADLCompiler compiler;

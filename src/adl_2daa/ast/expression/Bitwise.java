@@ -49,4 +49,14 @@ public class Bitwise extends ASTBinary{
 		super.compile(ins, compiler);
 		ins.add(new Instruction(Opcode.B_OP,new Object[]{op.assocParam}));
 	}
+
+	@Override
+	protected void parseBinaryOp(StringBuilder str) {
+		for(BitOp op : BitOp.values()){
+			if(this.op == op){
+				str.append(op.tag);
+				break;
+			}
+		}
+	}
 }

@@ -41,4 +41,16 @@ public class Function extends ASTExpression{
 		ins.add(new Instruction(Opcode.FUNC, 
 				new Object[]{name,params.length,singleQuery}));
 	}
+
+	@Override
+	public void toScript(StringBuilder str, int indent) {
+		str.append(name).append('(');
+		for(int i=0; i<params.length; i++){
+			params[i].toScript(str, 0);
+			if(i < params.length-1)
+				str.append(',').append(' ');
+		}
+		str.append(')');
+		if(singleQuery) str.append('$');
+	}
 }

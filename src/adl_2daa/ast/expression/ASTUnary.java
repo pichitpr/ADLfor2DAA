@@ -52,4 +52,15 @@ public class ASTUnary extends ASTExpression{
 		node.compile(ins, compiler);
 		ins.add(new Instruction(Opcode.U_OP,new Object[]{op.assocParam}));
 	}
+
+	@Override
+	public void toScript(StringBuilder str, int indent) {
+		for(UnaryOp op : UnaryOp.values()){
+			if(this.op == op){
+				str.append(op.tag);
+				break;
+			}
+		}
+		node.toScript(str, 0);
+	}
 }

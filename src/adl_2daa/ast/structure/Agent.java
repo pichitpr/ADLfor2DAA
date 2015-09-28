@@ -28,4 +28,20 @@ public class Agent extends ASTBlock{
 	public List<State> getStates() {
 		return states;
 	}
+
+	@Override
+	protected void parseBlockContent(StringBuilder str, int contentIndent) {
+		if(init != null){ 
+			init.toScript(str, contentIndent);
+			str.append('\n');
+		}
+		for(State state : states){
+			state.toScript(str, contentIndent);
+			str.append('\n');
+		}
+		if(des != null){ 
+			des.toScript(str, contentIndent);
+			str.append('\n');
+		}
+	}
 }

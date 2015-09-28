@@ -20,4 +20,9 @@ public class And extends ASTBinary{
 		ins.add(new Instruction(Opcode.B_OP,new Object[]{OpParam.AND}));
 	}
 
+	@Override
+	protected void parseBinaryOp(StringBuilder str) {
+		str.append("&&");
+	}
+
 }

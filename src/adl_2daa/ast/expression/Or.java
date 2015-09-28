@@ -19,4 +19,9 @@ public class Or extends ASTBinary{
 		super.compile(ins, compiler);
 		ins.add(new Instruction(Opcode.B_OP,new Object[]{OpParam.OR}));
 	}
+
+	@Override
+	protected void parseBinaryOp(StringBuilder str) {
+		str.append("||");
+	}
 }

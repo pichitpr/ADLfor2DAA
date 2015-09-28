@@ -1,5 +1,5 @@
 package adl_2daa.ast;
 
-public abstract class ASTStatement implements Compilable{
+public abstract class ASTStatement implements Compilable, Reversible{
 
 }

@@ -17,4 +17,12 @@ public class Sequence extends ASTBlock{
 	public List<ASTStatement> getStatements() {
 		return statements;
 	}
+
+	@Override
+	protected void parseBlockContent(StringBuilder str, int contentIndent) {
+		for(ASTStatement st : statements){
+			st.toScript(str, contentIndent);
+			str.append('\n');
+		}
+	}
 }

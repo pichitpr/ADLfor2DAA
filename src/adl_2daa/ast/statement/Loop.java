@@ -49,4 +49,17 @@ public class Loop extends ASTStatement{
 		ins.add(new Instruction(Opcode.ILABEL, new Object[]{endLabel}));
 	}
 
+	@Override
+	public void toScript(StringBuilder str, int indent) {
+		for(int i=1; i<=indent; i++) str.append('\t');
+		str.append("loop").append('(');
+		loopCount.toScript(str, 0);
+		str.append(')').append('{').append('\n');
+		for(ASTStatement st : content){
+			st.toScript(str, indent+1);
+			str.append('\n');
+		}
+		for(int i=1; i<=indent; i++) str.append('\t');
+		str.append('}');
+	}
 }

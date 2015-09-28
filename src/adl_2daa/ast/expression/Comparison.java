@@ -54,4 +54,14 @@ public class Comparison extends ASTBinary{
 		super.compile(ins, compiler);
 		ins.add(new Instruction(Opcode.COMPARE,new Object[]{op.assocParam}));
 	}
+
+	@Override
+	protected void parseBinaryOp(StringBuilder str) {
+		for(Comp comp : Comp.values()){
+			if(this.op == comp){
+				str.append(op.tag);
+				break;
+			}
+		}
+	}
 }

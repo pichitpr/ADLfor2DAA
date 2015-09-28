@@ -52,4 +52,16 @@ public class Action extends ASTStatement{
 		}
 		ins.add(new Instruction(Opcode.ENDACTION, null));
 	}
+
+	@Override
+	public void toScript(StringBuilder str, int indent) {
+		for(int i=1; i<=indent; i++) str.append('\t');
+		str.append(name).append('(');
+		for(int i=0; i<params.length; i++){
+			params[i].toScript(str, 0);
+			if(i < params.length-1)
+				str.append(',').append(' ');
+		}
+		str.append(')').append(';');
+	}
 }

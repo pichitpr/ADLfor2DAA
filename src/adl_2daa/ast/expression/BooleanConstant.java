@@ -23,4 +23,9 @@ public class BooleanConstant extends ASTExpression{
 	public void compile(List<Instruction> ins, ADLCompiler compiler) {
 		ins.add(new Instruction(Opcode.PUSH, new Object[]{value}));
 	}
+
+	@Override
+	public void toScript(StringBuilder str, int indent) {
+		str.append(value ? "true" : "false");
+	}
 }

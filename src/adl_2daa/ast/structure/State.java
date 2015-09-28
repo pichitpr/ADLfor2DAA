@@ -16,4 +16,12 @@ public class State extends ASTBlock {
 	public List<Sequence> getSequences() {
 		return sequences;
 	}
+
+	@Override
+	protected void parseBlockContent(StringBuilder str, int contentIndent) {
+		for(Sequence seq : sequences){
+			seq.toScript(str, contentIndent);
+			str.append('\n');
+		}
+	}
 }

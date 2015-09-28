@@ -49,4 +49,28 @@ public class Condition extends ASTStatement{
 		}
 		ins.add(new Instruction(Opcode.ILABEL, new Object[]{endLabel2}));
 	}
+
+	@Override
+	public void toScript(StringBuilder str, int indent) {
+		for(int i=1; i<=indent; i++) str.append('\t');
+		str.append("if").append('(');
+		condition.toScript(str, 0);
+		str.append(')').append('{').append('\n');
+		for(ASTStatement st : ifblock){
+			st.toScript(str, indent+1);
+			str.append('\n');
+		}
+		for(int i=1; i<=indent; i++) str.append('\t');
+		str.append('}');
+		
+		if(elseblock == null) return;
+		str.append(" else ").append('{').append('\n');
+		for(ASTStatement st : elseblock){
+			st.toScript(str, indent+1);
+			str.append('\n');
+		}
+		for(int i=1; i<=indent; i++) str.append('\t');
+		str.append('}');
+		
+	}
 }

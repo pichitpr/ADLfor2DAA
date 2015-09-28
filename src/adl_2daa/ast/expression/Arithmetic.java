@@ -53,4 +53,14 @@ public class Arithmetic extends ASTBinary{
 		super.compile(ins, compiler);
 		ins.add(new Instruction(Opcode.B_OP,new Object[]{op.assocParam}));
 	}
+
+	@Override
+	protected void parseBinaryOp(StringBuilder str) {
+		for(MathOp op : MathOp.values()){
+			if(this.op == op){
+				str.append(op.tag);
+				break;
+			}
+		}
+	}
 }

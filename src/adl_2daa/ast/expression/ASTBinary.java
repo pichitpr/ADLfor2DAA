@@ -29,4 +29,17 @@ public abstract class ASTBinary extends ASTExpression{
 		this.right.compile(ins, compiler);
 		this.left.compile(ins, compiler);
 	}
+	
+	@Override
+	public void toScript(StringBuilder str, int indent){
+		str.append('(');
+		left.toScript(str, 0);
+		str.append(' ');
+		parseBinaryOp(str);
+		str.append(' ');
+		right.toScript(str, 0);
+		str.append(')');
+	}
+	
+	protected abstract void parseBinaryOp(StringBuilder str);
 }

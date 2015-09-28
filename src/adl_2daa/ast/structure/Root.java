@@ -2,14 +2,13 @@ package adl_2daa.ast.structure;
 
 import java.util.List;
 
-import adl_2daa.ast.ASTBlock;
+import adl_2daa.ast.Reversible;
 
-public class Root extends ASTBlock{
+public class Root implements Reversible{
 
 	private List<Agent> relatedAgents;
 
 	public Root(List<Agent> relatedAgents) {
-		super(null);
 		this.relatedAgents = relatedAgents;
 	}
 
@@ -17,4 +16,11 @@ public class Root extends ASTBlock{
 		return relatedAgents;
 	}
 	
+	@Override
+	public void toScript(StringBuilder str, int indent){
+		for(Agent agent : relatedAgents){
+			agent.toScript(str, 0);
+			str.append('\n');
+		}
+	}
 }

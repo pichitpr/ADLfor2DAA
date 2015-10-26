@@ -38,8 +38,12 @@ public class ASTUnary extends ASTExpression{
 	public UnaryOp op;
 
 	public ASTUnary(String op, ASTExpression node) throws Exception {
+		this(UnaryOp.getByTag(op), node);
+	}
+	
+	public ASTUnary(UnaryOp op, ASTExpression node){
 		super();
-		this.op = UnaryOp.getByTag(op);
+		this.op = op;
 		this.node = node;
 	}
 

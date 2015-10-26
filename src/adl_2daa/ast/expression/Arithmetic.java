@@ -40,8 +40,12 @@ public class Arithmetic extends ASTBinary{
 	public MathOp op;
 	
 	public Arithmetic(ASTExpression left, String op, ASTExpression right) throws Exception {
+		this(left, MathOp.getByTag(op), right);
+	}
+	
+	public Arithmetic(ASTExpression left, MathOp op, ASTExpression right){
 		super(left, right);
-		this.op = MathOp.getByTag(op);
+		this.op = op;
 	}
 	
 	public MathOp getOp(){

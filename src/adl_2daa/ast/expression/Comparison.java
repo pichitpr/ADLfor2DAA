@@ -41,8 +41,12 @@ public class Comparison extends ASTBinary{
 	private Comp op;
 	
 	public Comparison(ASTExpression left, String op, ASTExpression right) throws Exception {
+		this(left, Comp.getByTag(op), right);
+	}
+	
+	public Comparison(ASTExpression left, Comp op, ASTExpression right) {
 		super(left, right);
-		this.op = Comp.getByTag(op);
+		this.op = op;
 	}
 	
 	public Comp getOp(){

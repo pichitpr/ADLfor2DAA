@@ -40,8 +40,12 @@ public class Bitwise extends ASTBinary{
 	public BitOp op;
 	
 	public Bitwise(ASTExpression left, String op, ASTExpression right) throws Exception {
+		this(left, BitOp.getByTag(op), right);
+	}
+	
+	public Bitwise(ASTExpression left, BitOp op, ASTExpression right){
 		super(left, right);
-		this.op = BitOp.getByTag(op);
+		this.op = op;
 	}
 	
 	@Override

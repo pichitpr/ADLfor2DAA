@@ -20,7 +20,7 @@ public class Root implements Reversible{
 	public void toScript(StringBuilder str, int indent){
 		for(Agent agent : relatedAgents){
 			agent.toScript(str, 0);
-			str.append('\n');
+			str.append(System.lineSeparator());
 		}
 	}
 }

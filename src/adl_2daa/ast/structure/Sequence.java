@@ -22,7 +22,7 @@ public class Sequence extends ASTBlock{
 	protected void parseBlockContent(StringBuilder str, int contentIndent) {
 		for(ASTStatement st : statements){
 			st.toScript(str, contentIndent);
-			str.append('\n');
+			str.append(System.lineSeparator());
 		}
 	}
 }

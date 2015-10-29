@@ -33,15 +33,15 @@ public class Agent extends ASTBlock{
 	protected void parseBlockContent(StringBuilder str, int contentIndent) {
 		if(init != null){ 
 			init.toScript(str, contentIndent);
-			str.append('\n');
+			str.append(System.lineSeparator());
 		}
 		for(State state : states){
 			state.toScript(str, contentIndent);
-			str.append('\n');
+			str.append(System.lineSeparator());
 		}
 		if(des != null){ 
 			des.toScript(str, contentIndent);
-			str.append('\n');
+			str.append(System.lineSeparator());
 		}
 	}
 }

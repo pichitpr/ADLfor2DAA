@@ -21,7 +21,7 @@ public class State extends ASTBlock {
 	protected void parseBlockContent(StringBuilder str, int contentIndent) {
 		for(Sequence seq : sequences){
 			seq.toScript(str, contentIndent);
-			str.append('\n');
+			str.append(System.lineSeparator());
 		}
 	}
 }

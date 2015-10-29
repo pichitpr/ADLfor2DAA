@@ -54,10 +54,10 @@ public class Loop extends ASTStatement{
 		for(int i=1; i<=indent; i++) str.append('\t');
 		str.append("loop").append('(');
 		loopCount.toScript(str, 0);
-		str.append(')').append('{').append('\n');
+		str.append(')').append('{').append(System.lineSeparator());
 		for(ASTStatement st : content){
 			st.toScript(str, indent+1);
-			str.append('\n');
+			str.append(System.lineSeparator());
 		}
 		for(int i=1; i<=indent; i++) str.append('\t');
 		str.append('}');

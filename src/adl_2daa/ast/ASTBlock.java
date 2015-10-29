@@ -15,7 +15,7 @@ public abstract class ASTBlock implements Reversible{
 	@Override
 	public void toScript(StringBuilder str, int indent){
 		for(int i=1; i<=indent; i++) str.append('\t');
-		str.append('.').append(identifier).append('{').append('\n');
+		str.append('.').append(identifier).append('{').append(System.lineSeparator());
 		
 		parseBlockContent(str, indent+1);
 		

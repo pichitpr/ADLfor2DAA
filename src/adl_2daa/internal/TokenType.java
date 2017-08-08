@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 
 public enum TokenType {
-	FLOAT("^[0-9]+\\.[0-9]+",false),
+	FLOAT("^[0-9]+\\.[0-9]+(E[0-9]+)?",false),
 	INT("^[0-9]+",false),
 	STRING("^\"(?:[^\"\\\\]|\\\\.)*\"",false), //http://stackoverflow.com/questions/249791/regex-for-quoted-string-with-escaping-quotes
 	RESERVED("^(true|false|loop|if|else(\\s*if)?)",true),

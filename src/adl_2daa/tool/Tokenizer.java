@@ -138,4 +138,19 @@ public class Tokenizer {
 		}
 		return line+1;
 	}
+	
+	public String dumpTokenizedString(){
+		StringBuilder strb = new StringBuilder();
+		int counter = 0;
+		int lineend = 0;
+		for(Token tok : tokenList){
+			strb.append(tok.toString()).append(" ");
+			counter++;
+			if(lineend < lineLastToken.size() && counter >= lineLastToken.get(lineend)){
+				strb.append("\r\n");
+				lineend++;
+			}
+		}
+		return strb.toString();
+	}
 }

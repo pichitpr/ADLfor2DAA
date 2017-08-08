@@ -6,6 +6,10 @@ import java.util.Set;
 
 public abstract class AgentModelInterpreter {
 	
+	public boolean stateVerbose = false;
+	public boolean sequenceVerbose = false;
+	public boolean detailVerbose = false;
+	
 	protected AgentModel agent;
 	protected int currentState,usedInterpreter;
 	protected Set<Integer> pendingNextState;
@@ -29,6 +33,8 @@ public abstract class AgentModelInterpreter {
 		if(errorOccurs) return;
 		if(agent.getInitBlock() != null){
 			stateItp[0] = new SequenceInterpreter(createInterpreterExtraData());
+			stateItp[0].verbose = sequenceVerbose;
+			stateItp[0].verboseDetail = detailVerbose;
 			stateItp[0].reload(agent.getInitBlock().getBehaviorCode());
 			try {
 				stateItp[0].interpret();
@@ -55,6 +61,8 @@ public abstract class AgentModelInterpreter {
 		if(errorOccurs) return;
 		try {
 			for(int i=0; i<usedInterpreter; i++){
+				if(stateVerbose)
+					System.out.println("State: "+ currentState +"   Seq: "+i);
 				stateItp[i].interpret();
 			}
 		} catch (Exception e) {
@@ -79,8 +87,11 @@ public abstract class AgentModelInterpreter {
 	public void onDespawn(){
 		if(errorOccurs) return;
 		if(agent.getDesBlock() != null){
-			if(stateItp[0] == null)
+			if(stateItp[0] == null){
 				stateItp[0] = new SequenceInterpreter(createInterpreterExtraData());
+				stateItp[0].verbose = sequenceVerbose;
+				stateItp[0].verboseDetail = detailVerbose;
+			}
 			stateItp[0].reload(agent.getDesBlock().getBehaviorCode());
 			try {
 				stateItp[0].interpret();
@@ -99,6 +110,8 @@ public abstract class AgentModelInterpreter {
 		for(int i=0; i<usedInterpreter; i++){
 			if(stateItp[i] == null){
 				stateItp[i] = new SequenceInterpreter(createInterpreterExtraData());
+				stateItp[i].verbose = sequenceVerbose;
+				stateItp[i].verboseDetail = detailVerbose;
 			}
 			stateItp[i].reload(sequences[i].getBehaviorCode());
 		}

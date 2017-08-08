@@ -11,6 +11,7 @@ import adl_2daa.internal.Opcode;
 public class SequenceInterpreter {
 
 	public boolean verbose = false;
+	public boolean verboseDetail = false;
 	
 	private List<Instruction> sequenceCode;
 	private int address;
@@ -78,8 +79,9 @@ public class SequenceInterpreter {
 		Opcode opcode = ins.opcode;
 		Object[] param = ins.param;
 		
-		if(verbose){
-			System.out.println(address+"@ "+ins);
+		if(verboseDetail){
+			//System.out.println(address+"@ "+ins);
+			System.out.println(opcode);
 		}
 		
 		int memIndex;
@@ -270,6 +272,8 @@ public class SequenceInterpreter {
 	}
 	
 	private void interpretAction(Object[] param){
+		if(verbose)
+			System.out.println(param[0].toString());
 		IAction action = Registry.getAction(param[0].toString());
 		if(action == null){
 			reportError("Call unregistered function "+param[0].toString());
@@ -286,6 +290,8 @@ public class SequenceInterpreter {
 	}
 	
 	private void interpretFunction(Object[] param){
+		if(verbose)
+			System.out.println(param[0].toString());
 		IFunction function = Registry.getFunction(param[0].toString());
 		if(function == null){
 			reportError("Call unregistered function "+param[0].toString());
